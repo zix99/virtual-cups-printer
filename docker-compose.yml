@@ -1,0 +1,22 @@
+version: "3.4"
+services:
+  printserver:
+    build: .
+    restart: unless-stopped
+    networks:
+      - cups-vlan
+    volumes:
+      - /tmp/output:/mnt/output
+    ports:
+      - 631:631 # Expose HTTP server
+
+networks:
+  cups-vlan:
+    driver: macvlan
+    driver_opts:
+      parent: eth0 # Update as necessary
+    ipam:
+      config:
+        - subnet: "192.168.0.0/24"
+          ip_range: "192.168.0.12/32" #static IP
+          gateway: "192.168.0.1"

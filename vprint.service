@@ -1,0 +1,20 @@
+<?xml version="1.0" ?><!DOCTYPE service-group  SYSTEM 'avahi-service.dtd'>
+<service-group>
+  <name replace-wildcards="yes">Paperless Printer</name>
+  <service>
+    <type>_ipp._tcp</type>
+    <subtype>_universal._sub._ipp._tcp</subtype>
+    <port>631</port>
+    <txt-record>txtvers=1</txt-record>
+    <txt-record>qtotal=1</txt-record>
+    <txt-record>Transparent=T</txt-record>
+    <txt-record>URF=none</txt-record>
+    <txt-record>rp=printers/Paperless_Printer</txt-record>
+    <txt-record>note=Virtual Paperless Printer</txt-record>
+    <txt-record>product=(Generic PostScript Printer)</txt-record>
+    <txt-record>ty=Generic PostScript Printer</txt-record>
+    <txt-record>printer-state=3</txt-record>
+    <txt-record>printer-type=0x800004</txt-record>
+    <txt-record>application/postscript</txt-record>
+  </service>
+</service-group>
