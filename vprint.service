@@ -8,7 +8,8 @@
     <txt-record>txtvers=1</txt-record>
     <txt-record>qtotal=1</txt-record>
     <txt-record>Transparent=T</txt-record>
-    <txt-record>URF=none</txt-record>
+    <txt-record>URF=DM3</txt-record>
+    <txt-record>pdl=image/urf</txt-record>
     <txt-record>rp=printers/Paperless_Printer</txt-record>
     <txt-record>note=Virtual Paperless Printer</txt-record>
     <txt-record>product=(Generic PostScript Printer)</txt-record>
