@@ -3,6 +3,11 @@ services:
   printserver:
     build: .
     restart: unless-stopped
+    environment:
+      PRINTER_ID: Paperless_Printer # ID (No spaces)
+      PRINTER_NAME: Paperless Printer # Name of printer
+      HOSTNAME: '192.168.0.12:631' # Use static IP (below) or hostname if you have one
+      OUTPUT_SUBPATH: 'vprint' # Subpath in /mnt/output/
     networks:
       - cups-vlan
     volumes:

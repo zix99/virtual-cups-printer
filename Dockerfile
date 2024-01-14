@@ -1,17 +1,25 @@
 FROM debian:bullseye-slim
+ARG USERNAME=print PASSWORD=print
+ENV \
+    PRINTER_ID=Paperless_Printer \
+    PRINTER_NAME=Paperless\ Printer \
+    HOSTNAME=127.0.0.1 \
+    OUTPUT_SUBPATH=vprint \
+    OUTPUT_USERNAME=$USERNAME
+
+# Dependenicies
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends cups printer-driver-cups-pdf
+RUN apt-get install -y --no-install-recommends cups printer-driver-cups-pdf gettext
 
 # Cups config/setup
-# user/pass: print/print
-RUN useradd -G lp,lpadmin -s /bin/bash -p '$1$Rou780QF$NSzw1twyIfu2zmZgob4tw0' print
-COPY *.conf /etc/cups/
-RUN cp /usr/share/ppd/cups-pdf/CUPS-PDF_noopt.ppd /etc/cups/ppd/Paperless_Printer.ppd
+RUN useradd -G lp,lpadmin -s /bin/bash -p "$(openssl passwd -1 $PASSWORD)" $USERNAME
 
 # discoverability
 RUN apt-get install -y avahi-daemon
 RUN sed -i 's/.*enable\-dbus=.*/enable\-dbus\=no/' /etc/avahi/avahi-daemon.conf
-COPY vprint.service /etc/avahi/services/
 
-COPY entrypoint.sh /opt/entrypoint.sh
-CMD ["/opt/entrypoint.sh"]
+# Copy configs
+WORKDIR /opt/vp
+COPY . .
+
+CMD ["./entrypoint.sh"]
