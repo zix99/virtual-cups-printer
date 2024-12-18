@@ -15,9 +15,15 @@ The http/print server will listen on port `631`. The default username/password i
 ## Avahi (Optional, but recommended)
 
 In order to make the printer discoverable, avahi needs to be set up.  For it to work correctly on the network, it should share the network space
-with its own IP.  The easiest way to do this is to assign it a static IP in non-dhcp space via `macvlan`.
+with its own IP.  There are two ways to do this: either by using the `host` network, or by assigning it a static IP in non-dhcp space via `macvlan`.
 
-## Macvlan
+If you plan on running more than 1 instance/printer, you'll need to use `macvlan`
+
+### Host Network
+
+Uncomment `network_mode: host` in the `docker-compose.yml` file and comment out the `network` section.
+
+### Macvlan
 
 Docker-compose setup, for example in `192.168.0.0/24` space.
 

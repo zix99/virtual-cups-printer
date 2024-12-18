@@ -9,11 +9,14 @@ services:
       HOSTNAME: '192.168.0.12:631' # Use static IP (below) or hostname if you have one
       OUTPUT_SUBPATH: 'vprint' # Subpath in /mnt/output/
     networks:
-      - cups-vlan
+      cups-vlan:
+        ipv4_address: 192.168.8.12 # modify as necessary
+    # Alternatively, use host networking (and comment out networks section above)
+    # network_mode: host
+    ports:
+      - 631:631 # Expose HTTP server (Or use a reverse proxy)
     volumes:
       - /tmp/output:/mnt/output
-    ports:
-      - 631:631 # Expose HTTP server
 
 networks:
   cups-vlan:
